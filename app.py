@@ -28,7 +28,7 @@ def author():
             </body>
         </html>"""
 
-@app.route("/lab1/image")
+@app.route("/image")
 def image():
     path = url_for("static", filename="oak.jpg")
     return '''
