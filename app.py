@@ -8,14 +8,17 @@ def not_found(err):
 
 @app.route("/")
 @app.route("/web")
-def start():
-    return """<!doctype html>
+def web():
+    return '''<!doctype html>
         <html>
            <body>
                <hl>web-сервер на flask</h1>
                <p><a href="/author">author</a></p>
            </body>
-        </html>"""
+        </html>''', 200, {
+            'X-Server': 'sample',
+            'Content-Type': 'text/plain; charset=utf-8'
+        }
 
 @app.route("/author")
 def author():
