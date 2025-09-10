@@ -73,8 +73,15 @@ def counter():
         Дата и время ''' + str(time) + '''<br>
         Запрошенный адрес: ''' + url + '''<br>
         Ваш IP адрес: ''' + client_ip + '''<br>
+        <a href="/discounter">Очистить счётчик</a>
     </body>
 </html>'''
+
+@app.route('/discounter')
+def discounter():
+    global count
+    count = 0
+    return redirect("/counter")
 
 @app.route('/info')
 def info():
