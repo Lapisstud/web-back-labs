@@ -7,7 +7,7 @@ def not_found(err):
     return "Нет такой страницы", 404
 
 @app.route("/")
-@app.route("/web")
+@app.route("/lab1/web")
 def web():
     return '''<!doctype html>
         <html>
@@ -20,7 +20,7 @@ def web():
             'Content-Type': 'text/plain; charset=utf-8'
         }
 
-@app.route("/author")
+@app.route("/lab1/author")
 def author():
     name = "Калинин Игорь Евгеньевич"
     group = "ФБИ-32"
@@ -32,11 +32,11 @@ def author():
                 <p>Студент: """ + name + """</p>
                 <p>Группа: """ + group + """</p>
                 <p>Факультет: """ + faculty + """</p>
-                <a href="/web">web</a>
+                <a href="/lab1/web">web</a>
             </body>
         </html>"""
 
-@app.route("/image")
+@app.route("/lab1/image")
 def image():
     path = url_for("static", filename="oak.jpg")
     Stylesheet = url_for("static", filename="lab1.css")
@@ -57,7 +57,7 @@ def image():
 
 count = 0
 
-@app.route('/counter')
+@app.route('/lab1/counter')
 def counter():
     global count
     count +=1
@@ -73,21 +73,21 @@ def counter():
         Дата и время ''' + str(time) + '''<br>
         Запрошенный адрес: ''' + url + '''<br>
         Ваш IP адрес: ''' + client_ip + '''<br>
-        <a href="/discounter">Очистить счётчик</a>
+        <a href="/lab1/discounter">Очистить счётчик</a>
     </body>
 </html>'''
 
-@app.route('/discounter')
+@app.route('/lab1/discounter')
 def discounter():
     global count
     count = 0
-    return redirect("/counter")
+    return redirect("/lab1/counter")
 
-@app.route('/info')
+@app.route('/lab1/info')
 def info():
-    return redirect("/author")
+    return redirect("/lab1/author")
 
-@app.route('/created')
+@app.route('/lab1/created')
 def created():
      return '''
 <!doctype html>
