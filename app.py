@@ -36,6 +36,10 @@ def method_not_alloowed(err):
 def Im_teapot(err):
     return "Студент Калинин Игорь - чайник, пожалуйста не нужно <strike> просить его варить кофе </strike> спрашивать с него защиту лабораторной", 418
 
+@app.errorhandler(500)
+def internal_server_error(err):
+    return "Технические шоколадки", 500
+
 @app.route("/")
 @app.route("/index")
 def main():
@@ -179,3 +183,7 @@ def created():
 @app.route('/418')
 def teapot_route():
     abort(418)
+
+@app.route('/500')
+def internal_server_err():
+    abort(500)
