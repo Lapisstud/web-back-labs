@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, redirect
+from flask import Flask, url_for, request, redirect, abort
 import datetime
 app = Flask(__name__)
 
@@ -16,7 +16,17 @@ def forbidden(err):
 
 @app.errorhandler(404)
 def not_found(err):
-    return "Нет такой страницы", 404
+    Stylesheet = url_for("static", filename="lab1.css")
+    return '''
+    <!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="''' + Stylesheet + '''">
+    </head>
+    <body>
+        Нет такой страницы. Что вы вообще искали?
+    </body>
+</html>''', 404 
 
 @app.errorhandler(405)
 def method_not_alloowed(err):
@@ -166,3 +176,6 @@ def created():
     </body>
 </html>
 ''', 201
+@app.route('/418')
+def teapot_route():
+    abort(418)
