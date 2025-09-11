@@ -2,9 +2,29 @@ from flask import Flask, url_for, request, redirect
 import datetime
 app = Flask(__name__)
 
+@app.errorhandler(400)
+def bad_request(err):
+    return "Что-то пошло не так. Проверьте введённые данные", 400
+
+@app.errorhandler(401)
+def unauthorized(err):
+    return "Требуется авторизация. Войдите в систему.", 401
+
+@app.errorhandler(403)
+def forbidden(err):
+    return "У вас нет прав для доступа к этой странице.", 403
+
 @app.errorhandler(404)
 def not_found(err):
     return "Нет такой страницы", 404
+
+@app.errorhandler(405)
+def method_not_alloowed(err):
+    return "Это действие не поддерживается.", 405
+
+@app.errorhandler(418)
+def Im_teapot(err):
+    return "Студент Калинин Игорь - чайник, пожалуйста не нужно <strike> просить его варить кофе </strike> спрашивать с него защиту лабораторной", 418
 
 @app.route("/")
 @app.route("/index")
