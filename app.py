@@ -15,7 +15,7 @@ def main():
 <html>
     <head>
         <link rel="stylesheet" href="''' + Stylesheet + '''">
-        <title НГТУ ФБ Лабораторные работы </title>
+        <title> НГТУ ФБ Лабораторные работы </title>
     </head>
     <body>
         <div class="container">
