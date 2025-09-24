@@ -92,13 +92,15 @@ def lab1():
             <a href="/lab1/counter">counter</a><br>
             <a href="/lab1/info">info</a><br>
             <a href="/lab1/created">created</a><br>
+            <a href="/lab1/error">error</a>
         </div>
     </body>
 </html>'''
 
 @app.route("/lab1/web")
 def web():
-    return '''<!doctype html>
+    return '''
+    <!doctype html>
         <html>
            <body>
                <hl>web-сервер на flask</h1>
@@ -188,9 +190,63 @@ def created():
 </html>
 ''', 201
 @app.route('/418')
-def teapot_route():
+def route_error_418():
     abort(418)
 
+@app.route('/400')
+def route_error_400():
+    abort(400)
+
+@app.route('/401')
+def route_error_401():
+    abort(401)
+
+@app.route('/402')
+def route_error_402():
+    abort(402)
+
+@app.route('/403')
+def route_error_403():
+    abort(403)
+
+@app.route('/404')
+def route_error_404():
+    abort(404)
+
+@app.route('/405')
+def route_error_405():
+    abort(405)
+
 @app.route('/500')
-def internal_server_err():
+def route_error_500():
     abort(500)
+
+@app.route("/lab1/error")
+def route_error():
+    Stylesheet = url_for("static", filename="lab1.css")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="''' + Stylesheet + '''">
+        <title> Лабораторная 1 </title>
+    </head>
+    <body>
+        <div class="container">
+            <p>Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов 
+            Werkzeug, а также шаблонизатор Jinja2. Относится к категории так называемых микрофреймворков — минималистичных каркасов 
+            веб-приложений, сознательно предоставляющих лишь самые базовые возможности.</p>
+
+            <a href="/">Вернуться на главную</a> 
+            <h2>Список роутов</h2>
+            <a href="/400">400</a><br>
+            <a href="/401">401</a><br>
+            <a href="/402">402</a><br>
+            <a href="/403">403</a><br>
+            <a href="/404">404</a><br>
+            <a href="/405">405</a><br>
+            <a href="/418">418</a><br>
+            <a href="/500">500</a><br>
+        </div>
+    </body>
+</html>'''
