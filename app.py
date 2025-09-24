@@ -85,6 +85,13 @@ def lab1():
             веб-приложений, сознательно предоставляющих лишь самые базовые возможности.</p>
 
             <a href="/">Вернуться на главную</a> 
+            <h2>Список роутов</h2>
+            <a href="/lab1/web">web</a><br>
+            <a href="/lab1/author">author</a><br>
+            <a href="/lab1/image">image</a><br>
+            <a href="/lab1/counter">counter</a><br>
+            <a href="/lab1/info">info</a><br>
+            <a href="/lab1/created">created</a><br>
         </div>
     </body>
 </html>'''
@@ -122,7 +129,7 @@ def author():
 def image():
     path = url_for("static", filename="oak.jpg")
     Stylesheet = url_for("static", filename="lab1.css")
-    return '''
+    return'''
 <!doctype html>
 <html>
     <head>
