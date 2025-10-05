@@ -166,7 +166,7 @@ def author():
 def image():
     path = url_for("static", filename="oak.jpg")
     Stylesheet = url_for("static", filename="lab1.css")
-    return'''
+    response = f'''
 <!doctype html>
 <html>
     <head>
@@ -180,6 +180,11 @@ def image():
         </div>
     </body>
 </html>'''
+    return response, 200, {
+        'Content-Language': 'ru',
+        'X-Custom-Header1': 'Value1',
+        'X-Custom-Header2': 'Value2'
+    }
 
 count = 0
 
