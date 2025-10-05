@@ -14,19 +14,54 @@ def unauthorized(err):
 def forbidden(err):
     return "У вас нет прав для доступа к этой странице.", 403
 
+access_log = []
+
 @app.errorhandler(404)
 def not_found(err):
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    client_ip = request.remote_addr
+    requested_url = request.url
+    
+    access_log.append({
+        'time': current_time,
+        'ip': client_ip,
+        'url': requested_url
+    })
+    
     Stylesheet = url_for("static", filename="lab1.css")
-    return '''
+    
+    log_html = ''
+    for entry in access_log:
+        log_html += f"<p class='log-entry'>{entry['time']}, пользователь {entry['ip']} зашёл на адрес: {entry['url']}</p>"
+    
+    return f'''
     <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" href="''' + Stylesheet + '''">
+        <link rel="stylesheet" href="{Stylesheet}">
+        <title>Страница не найдена</title>
     </head>
     <body>
-        Нет такой страницы. Что вы вообще искали?
+        <div class="container error-page">
+            <h1>404 - Страница не найдена</h1>
+            <p>К сожалению, запрошенная страница не существует.</p>
+            
+            <div class="info-section">
+                <h2>Информация о запросе:</h2>
+                <p><strong>Ваш IP:</strong> {client_ip}</p>
+                <p><strong>Время доступа:</strong> {current_time}</p>
+                <p><strong>Запрошенный URL:</strong> {requested_url}</p>
+            </div>
+            
+            <a href="/" class="home-link">Вернуться на главную страницу</a>
+            
+            <div class="log-section">
+                <h2>Журнал посещений:</h2>
+                {log_html}
+            </div>
+        </div>
     </body>
-</html>''', 404 
+</html>''', 404
 
 @app.errorhandler(405)
 def method_not_alloowed(err):
@@ -201,10 +236,6 @@ def route_error_400():
 def route_error_401():
     abort(401)
 
-@app.route('/402')
-def route_error_402():
-    abort(402)
-
 @app.route('/403')
 def route_error_403():
     abort(403)
@@ -229,19 +260,14 @@ def route_error():
 <html>
     <head>
         <link rel="stylesheet" href="''' + Stylesheet + '''">
-        <title> Лабораторная 1 </title>
+        <title> Ошибки </title>
     </head>
     <body>
         <div class="container">
-            <p>Flask — фреймворк для создания веб-приложений на языке программирования Python, использующий набор инструментов 
-            Werkzeug, а также шаблонизатор Jinja2. Относится к категории так называемых микрофреймворков — минималистичных каркасов 
-            веб-приложений, сознательно предоставляющих лишь самые базовые возможности.</p>
-
-            <a href="/">Вернуться на главную</a> 
-            <h2>Список роутов</h2>
+            <a href="/lab1">Вернуться к первой лабораторной</a> 
+            <h1>Список роутов для вызова ошибок</h1>
             <a href="/400">400</a><br>
             <a href="/401">401</a><br>
-            <a href="/402">402</a><br>
             <a href="/403">403</a><br>
             <a href="/404">404</a><br>
             <a href="/405">405</a><br>
