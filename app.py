@@ -134,13 +134,23 @@ def lab1():
 
 @app.route("/lab1/web")
 def web():
+    Stylesheet = url_for("static", filename="lab1.css")
     return '''
     <!doctype html>
         <html>
-           <body>
-               <hl>web-сервер на flask</h1>
-               <p><a href="/author">author</a></p>
-           </body>
+            <head>
+                <link rel="stylesheet" href="''' + Stylesheet + '''">
+                <title> web </title>
+            </head>
+            <body>
+                <div class="home-link-top">
+                    <a href="/">На главную</a>
+                </div>
+                <div class="container">
+                    <hl>web-сервер на flask</h1>
+                    <p><a href="/author">author</a></p>
+                </div>
+            </body>
         </html>''', 200, {
             'X-Server': 'sample',
             'Content-Type': 'text/plain; charset=utf-8'
@@ -151,16 +161,26 @@ def author():
     name = "Калинин Игорь Евгеньевич"
     group = "ФБИ-32"
     faculty = "ФБ"
-
-    return """<!doctype html>
+    Stylesheet = url_for("static", filename="lab1.css")
+    return '''
+    <!doctype html>
         <html>
+            <head>
+                <link rel="stylesheet" href="''' + Stylesheet + '''">
+                <title> author </title>
+            </head>
             <body>
-                <p>Студент: """ + name + """</p>
-                <p>Группа: """ + group + """</p>
-                <p>Факультет: """ + faculty + """</p>
-                <a href="/lab1/web">web</a>
+                <div class="home-link-top">
+                    <a href="/">На главную</a>
+                </div>
+                <div class="container">
+                    <p>Студент: ''' + name + '''</p>
+                    <p>Группа: ''' + group + '''</p>
+                    <p>Факультет: ''' + faculty + '''</p>
+                    <a href="/lab1/web">web</a>
+                </div>
             </body>
-        </html>"""
+        </html>'''
 
 @app.route("/lab1/image")
 def image():
@@ -174,6 +194,9 @@ def image():
     </head>
 
     <body>
+        <div class="home-link-top">
+            <a href="/">На главную</a>
+        </div>
         <div class="container">
             <h1 class="main-title">Дуб</h1>
             <img src="''' + path + '''" class "main-image">
@@ -195,16 +218,26 @@ def counter():
     time = datetime.datetime.today()
     url = request.url
     client_ip = request.remote_addr
+    Stylesheet = url_for("static", filename="lab1.css")
     return '''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" href="''' + Stylesheet + '''">
+        <title> counter </title>
+    </head>
     <body>
-        Сколько раз вы сюда заходили: ''' + str(count) + '''
-        <hr>
-        Дата и время ''' + str(time) + '''<br>
-        Запрошенный адрес: ''' + url + '''<br>
-        Ваш IP адрес: ''' + client_ip + '''<br>
-        <a href="/lab1/discounter">Очистить счётчик</a>
+        <div class="home-link-top">
+            <a href="/">На главную</a>
+        </div>
+        <div class="container">
+            Сколько раз вы сюда заходили: ''' + str(count) + '''
+            <hr>
+            Дата и время ''' + str(time) + '''<br>
+            Запрошенный адрес: ''' + url + '''<br>
+            Ваш IP адрес: ''' + client_ip + '''<br>
+            <a href="/lab1/discounter">Очистить счётчик</a>
+        </div>
     </body>
 </html>'''
 
@@ -220,15 +253,26 @@ def info():
 
 @app.route('/lab1/created')
 def created():
-     return '''
+    Stylesheet = url_for("static", filename="lab1.css")
+    return '''
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" href="''' + Stylesheet + '''">
+        <title> CREATED </title>
+    </head>
     <body>
-        <h1>Создано успешно</h1>
-        <div><i>что-то создано...</i></div>
+        <div class="home-link-top">
+            <a href="/">На главную</a>
+        </div>
+        <div class="container">
+            <h1>Создано успешно</h1>
+            <div><i>что-то создано...</i></div>
+        </div>
     </body>
 </html>
 ''', 201
+
 @app.route('/418')
 def route_error_418():
     abort(418)
@@ -268,6 +312,9 @@ def route_error():
         <title> Ошибки </title>
     </head>
     <body>
+        <div class="home-link-top">
+            <a href="/">На главную</a>
+        </div>
         <div class="container">
             <a href="/lab1">Вернуться к первой лабораторной</a> 
             <h1>Список роутов для вызова ошибок</h1>
