@@ -334,7 +334,7 @@ def route_error():
 def a():
     return 'ok'
 
-flower_list = ('роза', 'тюльпан', 'незабудка', 'ромашка')
+flower_list = ['роза', 'тюльпан', 'незабудка', 'ромашка']
 
 @app.route('/lab2/flowers/<int:flower_id>')
 def flowers(flower_id):
@@ -342,3 +342,28 @@ def flowers(flower_id):
         abort(404)
     else:
         return "цветок: " + flower_list[flower_id]
+
+@app.route('/lab2/add_flower/<name>')
+def add_flower(name):
+    flower_list.append(name)
+    Stylesheet = url_for("static", filename="lab1.css")
+    return f'''
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{Stylesheet}">
+        <title> Цветы </title>
+    </head>
+    <body>
+        <div class="home-link-top">
+            <a href="/">На главную</a>
+        </div>
+        <div class="container">
+            <h1>Добавлен цветок</h1>
+            <p>Название нового цветка: {name}</p>
+            <p>Всего цветов: {len(flower_list)}</p>
+            <p>Полный список: {flower_list}</p>
+        </div>
+    </body>
+</html>
+'''
