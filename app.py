@@ -328,3 +328,8 @@ def route_error():
         </div>
     </body>
 </html>'''
+
+@app.route('/lab2/a/')
+@app.route('/lab2/a')
+def a():
+    return 'ok'
