@@ -372,6 +372,13 @@ def add_flower(name):
 def example():
     name = 'Игорь Калинин'
     groupe = 'ФБИ-32'
-    year = '3 курс'
-    lab = 'Лабораторная работа 2'
-    return render_template('example.html', name=name, groupe=groupe, lab=lab, year=year)
+    year = 3
+    lab = 2
+    fruits = [
+        {'name': 'апельсины', 'price': 100},
+        {'name': 'мандарины', 'price': 120},
+        {'name': 'манго', 'price': 90},
+        {'name': 'бананы', 'price': 50},
+        {'name': 'киви', 'price': 80}
+    ]
+    return render_template('example.html', name=name, groupe=groupe, lab=lab, year=year, fruits=fruits)
