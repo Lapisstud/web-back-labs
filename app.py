@@ -329,6 +329,7 @@ def route_error():
     </body>
 </html>'''
 
+
 @app.route('/lab2/a/')
 @app.route('/lab2/a')
 def a():
@@ -342,6 +343,10 @@ def flowers(flower_id):
         abort(404)
     else:
         return "цветок: " + flower_list[flower_id]
+    
+@app.route('/lab2/add_flower/')
+def add_flower_error():
+    return 'Вы не задали имя цветка', 400
 
 @app.route('/lab2/add_flower/<name>')
 def add_flower(name):
