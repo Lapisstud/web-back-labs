@@ -1,5 +1,4 @@
 from flask import Blueprint, url_for, abort, render_template
-import datetime
 lab2 = Blueprint('lab2', __name__)
 
 @lab2.route('/lab2/a/')

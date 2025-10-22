@@ -1,19 +1,25 @@
 from flask import Flask, url_for, request, redirect, abort, render_template
 import datetime
+
 from lab1 import lab1
 from lab2 import lab2
+from lab3 import lab3
+
 
 app = Flask(__name__)
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
+app.register_blueprint(lab3)
 
 @app.errorhandler(400)
 def bad_request(err):
     return "Что-то пошло не так. Проверьте введённые данные", 400
 
+
 @app.errorhandler(401)
 def unauthorized(err):
     return "Требуется авторизация. Войдите в систему.", 401
+
 
 @app.errorhandler(403)
 def forbidden(err):
@@ -68,17 +74,21 @@ def not_found(err):
     </body>
 </html>''', 404
 
+
 @app.errorhandler(405)
 def method_not_alloowed(err):
     return "Это действие не поддерживается.", 405
+
 
 @app.errorhandler(418)
 def Im_teapot(err):
     return "Студент Калинин Игорь - чайник, пожалуйста не нужно <strike> просить его варить кофе </strike> спрашивать с него защиту лабораторной", 418
 
+
 @app.errorhandler(500)
 def internal_server_error(err):
     return "Технические шоколадки", 500
+
 
 @app.route("/")
 @app.route("/index")
@@ -99,6 +109,8 @@ def main():
             </header>
 
             <a href="/lab1">Лабораторная работа 1</a> 
+            <a href="/lab2">Лабораторная работа 2</a>
+            <a href="/lab3">Лабораторная работа 3</a>
 
             <footer>
                 <p> Калинин Игорь Евгеньевич </p>

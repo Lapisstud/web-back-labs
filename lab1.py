@@ -1,5 +1,4 @@
 from flask import Blueprint, url_for, request, redirect, abort
-import datetime
 lab1 = Blueprint('lab1', __name__)
 
 @lab1.route("/lab1")
